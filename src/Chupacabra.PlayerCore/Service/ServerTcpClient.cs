@@ -5,7 +5,7 @@ using NLog;
 
 namespace Chupacabra.PlayerCore.Service
 {
-    public class ServerTcpClient : IDisposable
+    public class ServerTcpClient : IDisposable, ILineReader
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         readonly TcpClient _client;

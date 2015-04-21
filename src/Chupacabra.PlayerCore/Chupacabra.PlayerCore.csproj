@@ -73,9 +73,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CommandsLimitReachedException.cs" />
+    <Compile Include="Service\ILineReader.cs" />
     <Compile Include="Service\ServerException.cs" />
     <Compile Include="Service\ServerTcpClient.cs" />
     <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Service\Tokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Host\Forms\StatusMonitorControl.resx">

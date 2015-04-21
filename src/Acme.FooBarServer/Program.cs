@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,7 @@ namespace Acme.FooBarServer
             {
                 turnNumber = engine.TurnNumber;
             }
-            writer.WriteLine(string.Format("OK\n{0}", turnNumber));
+            writer.WriteLine(string.Format(NumberFormatInfo.InvariantInfo, "OK\n{0}", turnNumber));
         }
 
         private static void EnergyCommand(StreamReader reader, StreamWriter writer, GameEngine engine, int playerId, string parameters)
@@ -42,7 +43,7 @@ namespace Acme.FooBarServer
             {
                 energy = engine.GetPlayerEnergy(playerId);
             }
-            writer.WriteLine(string.Format("OK\n{0}", energy));
+            writer.WriteLine(string.Format(NumberFormatInfo.InvariantInfo, "OK\n{0}", energy));
         }
 
         private static void PricesCommand(StreamReader reader, StreamWriter writer, GameEngine engine, int playerId, string parameters)
@@ -51,8 +52,8 @@ namespace Acme.FooBarServer
             sb.AppendLine("OK");
             lock (engine)
             {
-                sb.AppendLine(string.Format("{0}", 42));
-                sb.AppendLine(string.Format("{0}", 42));
+                sb.AppendLine(string.Format(NumberFormatInfo.InvariantInfo, "{0}", 42));
+                sb.AppendLine(string.Format(NumberFormatInfo.InvariantInfo, "{0}", Math.Log10(engine.TurnNumber + 1)));
             }
             writer.Write(sb);
         }

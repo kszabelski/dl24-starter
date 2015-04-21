@@ -34,7 +34,7 @@ namespace Chupacabra.PlayerCore.Service
         static readonly Regex FailedResponse = new Regex(@"^\s*FAILED\s+(?<Code>\d+)\s+(?<Message>.+)\s*$");
         static readonly Regex ForcedWaitingResponse = new Regex(@"^\s*WAITING\s+(?<Time>[\d\.]+)\s*$");
 
-        public void ProcessResponseHeader()
+        protected void ProcessResponseHeader()
         {
             var line = this.Client.ReadLine();
             if (line == "OK") return;
@@ -62,10 +62,16 @@ namespace Chupacabra.PlayerCore.Service
             }
         }
 
+        protected void SendCommand(string format, params object[] args)
+        {
+            var command = string.Format(format, args);
+            this.Client.WriteLine(command);
+            ProcessResponseHeader();
+        }
+
         public int Wait()
         {
-            this.Client.WriteLine("WAIT");
-            ProcessResponseHeader();
+            SendCommand("WAIT");
             var tokens = this.Client.ReadLine().Split(' ');
             return (int)(double.Parse(tokens[1], System.Globalization.NumberFormatInfo.InvariantInfo) * 1000);
         }
@@ -74,5 +80,11 @@ namespace Chupacabra.PlayerCore.Service
         {
             ProcessResponseHeader();
         }
+
+        protected Tokenizer ReadTokens()
+        {
+            return new Tokenizer(this.Client);
+        }
+
     }
 }

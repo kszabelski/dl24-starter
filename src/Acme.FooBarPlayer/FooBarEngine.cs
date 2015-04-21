@@ -13,18 +13,18 @@ namespace Acme.FooBarPlayer
         void IgnoreErrors(Action action, IList<int> errorCodes)
         {
             try 
-	        {
+            {
                 action();
-	        }
-	        catch (ServerException se)
-	        {
+            }
+            catch (ServerException se)
+            {
                 if (errorCodes.Contains(se.ErrorCode))
                 {
                     Logger.Warn("INGORING: {0}", se.Message);
                 }
                 else
-		            throw;
-	        }
+                    throw;
+            }
 
         }
 
@@ -45,6 +45,10 @@ namespace Acme.FooBarPlayer
                         Monitor.SetValue("engine/turn", turnNo);
                         Monitor.SetValue("engine/tick", tick);
                         Logger.Info("tick {0}, turn {1}", tick, turnNo);
+                        if (tick%10 == 0)
+                        {
+                            Logger.Info("data {0}", string.Join(", ", service.GetPrices()));
+                        }
                         Monitor.ConfirmTurn();
                         if (_cancellationToken.WaitHandle.WaitOne(2000))
                         {
