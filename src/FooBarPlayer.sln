@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.FooBarPlayer", "Acme.FooBarPlayer\Acme.FooBarPlayer.csproj", "{4507B685-EA7A-47FA-AB54-75DC5AE47080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chupacabra.PlayerCore", "Chupacabra.PlayerCore\Chupacabra.PlayerCore.csproj", "{699F30DA-4CE3-471A-BD5B-C20D6F37EB57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{077E9B5F-AE43-4B34-B327-5E684E2C7F09}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chupacabra.PlayerCore.Tests", "Chupacabra.PlayerCore.Tests\Chupacabra.PlayerCore.Tests.csproj", "{2EFFD6B0-AF44-48D1-9878-597663D2F8D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4507B685-EA7A-47FA-AB54-75DC5AE47080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4507B685-EA7A-47FA-AB54-75DC5AE47080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4507B685-EA7A-47FA-AB54-75DC5AE47080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4507B685-EA7A-47FA-AB54-75DC5AE47080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{699F30DA-4CE3-471A-BD5B-C20D6F37EB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{699F30DA-4CE3-471A-BD5B-C20D6F37EB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{699F30DA-4CE3-471A-BD5B-C20D6F37EB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{699F30DA-4CE3-471A-BD5B-C20D6F37EB57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EFFD6B0-AF44-48D1-9878-597663D2F8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EFFD6B0-AF44-48D1-9878-597663D2F8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EFFD6B0-AF44-48D1-9878-597663D2F8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EFFD6B0-AF44-48D1-9878-597663D2F8D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
