@@ -26,7 +26,6 @@ namespace Acme.FooBarPlayer
 
         private void Run(string[] args)
         {
-            Core.ConfigureConsoleLogger();
 
             ReadCustomSettings();
 
