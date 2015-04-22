@@ -44,7 +44,7 @@ namespace Acme.FooBarPlayer
                         var turnNo = service.GetTurn();
                         Monitor.SetValue("engine/turn", turnNo);
                         Monitor.SetValue("engine/tick", tick);
-                        Logger.Info("tick {0}, turn {1}", tick, turnNo);
+                        Logger.Debug("tick {0}, turn {1}", tick, turnNo);
                         if (tick%10 == 0)
                         {
                             Logger.Info("data {0}", string.Join(", ", service.GetPrices()));

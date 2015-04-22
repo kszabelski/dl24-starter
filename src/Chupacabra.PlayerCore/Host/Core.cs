@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using NLog;
+using NLog.Conditions;
 using NLog.Config;
 using NLog.Targets;
 
@@ -22,11 +23,14 @@ namespace Chupacabra.PlayerCore.Host
             {
                 Name = "console",
                 UseDefaultRowHighlightingRules = true,
-                Layout = "${date:format=HH\\:mm\\:ss.fff} ${level:uppercase=true} ${message}",
+                Layout = "${date:format=HH\\:mm\\:ss.fff} ${message}",
             };
 
+            targetEngine.RowHighlightingRules.Add(new ConsoleRowHighlightingRule(ConditionParser.ParseExpression("equals('${logger}','Chupacabra.PlayerCore.Service.ServerTcpClient') and starts-with('${message}','->')"), ConsoleOutputColor.Cyan, ConsoleOutputColor.NoChange));
+            targetEngine.RowHighlightingRules.Add(new ConsoleRowHighlightingRule(ConditionParser.ParseExpression("equals('${logger}','Chupacabra.PlayerCore.Service.ServerTcpClient') and starts-with('${message}','<-')"), ConsoleOutputColor.DarkCyan, ConsoleOutputColor.NoChange));
+
             LogManager.Configuration.AddTarget("console", targetEngine);
-            LogManager.Configuration.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, targetEngine));
+            LogManager.Configuration.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, targetEngine));
             LogManager.ReconfigExistingLoggers();
         }
 

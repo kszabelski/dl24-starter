@@ -14,7 +14,7 @@ namespace Chupacabra.PlayerCore.Service
 
         public ServerTcpClient(string hostname, int port)
         {
-            Logger.Info("Connecting to {0}:{1}...", hostname, port);
+            Logger.Debug("Connecting to {0}:{1}...", hostname, port);
             this._client = new TcpClient(hostname, port)
             {
                 NoDelay = true
@@ -24,7 +24,7 @@ namespace Chupacabra.PlayerCore.Service
                 AutoFlush = true
             };
             this._reader = new StreamReader(this._client.GetStream());
-            Logger.Info("Connection to {0}:{1} established.", hostname, port);
+            Logger.Debug("Connection to {0}:{1} established.", hostname, port);
 
         }
 
@@ -33,19 +33,19 @@ namespace Chupacabra.PlayerCore.Service
             this._reader.Dispose();
             this._writer.Dispose();
             this._client.Close();
-            Logger.Info("Connection closed.");
+            Logger.Debug("Connection closed.");
         }
 
         public void WriteLine(string text)
         {
-            Logger.Info("Sending {0}", text);
+            Logger.Debug("-> {0}", text);
             this._writer.WriteLine(text);
         }
 
         public string ReadLine()
         {
             var line = this._reader.ReadLine();
-            Logger.Info("Response {0}", line);
+            Logger.Debug("<- {0}", line);
             return line;
         }
     }
