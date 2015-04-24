@@ -138,6 +138,7 @@ public class Program
 			""ServerPort"": {1},
 			""Login"": ""{2}"",
 			""Password"": ""{3}"",
+			""StateFilename"": ""state.json"",
 		}}
 					", serverHostname, serverPort, userName, password));
 			}

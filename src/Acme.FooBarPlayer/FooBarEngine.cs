@@ -36,6 +36,8 @@ namespace Acme.FooBarPlayer
                 using (var service = new FooBarService(ServerHostname, ServerPort))
                 {
                     service.Login(Login, Password);
+
+                    var state = StateHelper.Load<Dictionary<int, int>>() ?? new Dictionary<int, int>();
                     int tick = 0;
                     while (true)
                     {
@@ -45,11 +47,13 @@ namespace Acme.FooBarPlayer
                         Monitor.SetValue("engine/turn", turnNo);
                         Monitor.SetValue("engine/tick", tick);
                         Logger.Debug("tick {0}, turn {1}", tick, turnNo);
+                        state[turnNo] = tick;
                         if (tick%10 == 0)
                         {
                             Logger.Info("data {0}", string.Join(", ", service.GetPrices()));
                         }
                         Monitor.ConfirmTurn();
+                        StateHelper.Save(state);
                         if (_cancellationToken.WaitHandle.WaitOne(2000))
                         {
                             break;
