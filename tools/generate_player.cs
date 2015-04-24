@@ -125,6 +125,7 @@ public class Program
 			transformMap["files"]["20000"] = serverPort;
 			transformMap[@"^.+\.cmd$"]["20000"] = serverPort;
 			MirrorFile("Deploy_FooBar_20000.cmd");
+			MirrorFile("Run_FooBar_20000.cmd");
 
 			// Write custom settings file
 			{
