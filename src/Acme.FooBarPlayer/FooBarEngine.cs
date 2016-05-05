@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Chupacabra.PlayerCore.Host;
 using Chupacabra.PlayerCore.Service;
+using Chupacabra.PlayerCore.Visualizer;
 using NLog;
 
 namespace Acme.FooBarPlayer
@@ -9,6 +10,8 @@ namespace Acme.FooBarPlayer
     class FooBarEngine : EngineBase
     {
         public IStatusMonitor Monitor { get; set; }
+
+        public VisualizationHost Viaualization { get; set; }
 
         void IgnoreErrors(Action action, IList<int> errorCodes)
         {
@@ -54,6 +57,9 @@ namespace Acme.FooBarPlayer
                         }
                         Monitor.ConfirmTurn();
                         StateHelper.Save(state);
+
+                        Visualize(tick);
+
                         if (_cancellationToken.WaitHandle.WaitOne(2000))
                         {
                             break;
@@ -67,6 +73,20 @@ namespace Acme.FooBarPlayer
             {
                 Logger.Error(ex.Message);
             }
+        }
+
+        private void Visualize(int tick)
+        {
+            var board = new[]
+            {
+                new[] {"0", "0", "0"},
+                new[] {"0", "0", "0"},
+                new[] {"0", "0", "0"}
+            };
+            tick = tick%3;
+            board[tick][tick] = "11";
+
+            Viaualization.Visualize(board);
         }
     }
 }

@@ -78,6 +78,16 @@
     <Compile Include="Service\ServerTcpClient.cs" />
     <Compile Include="Service\ServiceBase.cs" />
     <Compile Include="Service\Tokenizer.cs" />
+    <Compile Include="Visualizer\BrushElementRepresentation.cs" />
+    <Compile Include="Visualizer\DefaultColorsStack.cs" />
+    <Compile Include="Visualizer\IElementRepresentation.cs" />
+    <Compile Include="Visualizer\VisualizationHost.cs" />
+    <Compile Include="Visualizer\VisualizationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Visualizer\VisualizationDialog.Designer.cs">
+      <DependentUpon>VisualizationDialog.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Host\Forms\StatusMonitorControl.resx">
@@ -85,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Host\Forms\StatusMonitorDialog.resx">
       <DependentUpon>StatusMonitorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visualizer\VisualizationDialog.resx">
+      <DependentUpon>VisualizationDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

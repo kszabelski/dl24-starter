@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Chupacabra.PlayerCore.Host;
 using Chupacabra.PlayerCore.Host.Forms;
+using Chupacabra.PlayerCore.Visualizer;
 using Newtonsoft.Json;
 using NLog;
 
@@ -17,6 +18,7 @@ namespace Acme.FooBarPlayer
         private FooBarEngine _engine;
         private FileStatusMonitor _fileStatusMonitor;
         private IStatusMonitorDialog _formsStatusMonitor;
+        private VisualizationHost _visualization;
 
         static void Main(string[] args)
         {
@@ -34,27 +36,32 @@ namespace Acme.FooBarPlayer
             _fileStatusMonitor = new FileStatusMonitor("status.txt");
             using (_formsStatusMonitor = new StatusMonitorDialogHost(title + " Status"))
             {
-                _engine = new FooBarEngine()
+                using (_visualization = new VisualizationHost(title + " Visualization"))
                 {
-                    ServerHostname = Properties.Settings.Default.ServerHostname,
-                    ServerPort = Properties.Settings.Default.ServerPort,
-                    Login = Properties.Settings.Default.Login,
-                    Password = Properties.Settings.Default.Password,
-                    Monitor = new CompositeStatusMonitor(_fileStatusMonitor, _formsStatusMonitor)
-                };
+                    _engine = new FooBarEngine()
+                    {
+                        ServerHostname = Properties.Settings.Default.ServerHostname,
+                        ServerPort = Properties.Settings.Default.ServerPort,
+                        Login = Properties.Settings.Default.Login,
+                        Password = Properties.Settings.Default.Password,
+                        Monitor = new CompositeStatusMonitor(_fileStatusMonitor, _formsStatusMonitor),
+                        Viaualization = _visualization
+                    };
 
-                if (args.Length > 0)
-                {
-                    _engine.ServerPort = int.Parse(args[0]);
+                    if (args.Length > 0)
+                    {
+                        _engine.ServerPort = int.Parse(args[0]);
+                    }
+
+                    Core.RunConsole(_engine, title, KeyHandler);
                 }
-
-                Core.RunConsole(_engine, title, KeyHandler);
             }
         }
 
         void KeyHandler(ConsoleKeyInfo keyInfo)
         {
             _formsStatusMonitor.Show();
+            _visualization.Show();
         }
 
         void ReadCustomSettings()
